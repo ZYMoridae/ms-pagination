@@ -1,0 +1,99 @@
+.pagination-container {
+  margin-top: 24px;
+  list-style-type: none;
+  text-align: center;
+  display: inline-flex;
+}
+
+.pagination-container .pagination-block {
+  position: relative;
+  float: left;
+  margin-left: -1px;
+  width: 35px;
+  border: solid 1px #ededed;
+  height: 35px;
+  color: #3e3e3e;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  vertical-align: middle;
+  z-index: 1;
+}
+
+.pagination-container .pagination-block:hover {
+  transition: all .5s;
+  border: 1px solid #ff5000;
+  color: #ff5000;
+  z-index: 999;
+}
+
+.pagination-container .pagination-block.active {
+  border: 1px solid #ff5000;
+  background-color: #ff5000;
+  color: white;
+  z-index: 999;
+}
+
+.pagination-container .page-number {
+  line-height: 19px;
+  text-align: center;
+}
+
+.pagination-container .page-number .num {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  font-size: 14px;
+  height: 100%;
+  line-height: 35px;
+  vertical-align: middle;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.pagination-container .page-spread {
+  border: none;
+}
+
+.pagination-container .page-spread:hover {
+  border: none;
+}
+
+.pagination-container .previousBtn svg {
+  height: 35px;
+}
+
+.pagination-container .nextBtn svg {
+  height: 35px;
+}
+
+.pagination-container .pagination-info {
+  position: relative;
+  float: left;
+  /* margin-left: -1px; */
+  /* width: 35px; */
+  /* border: solid 1px #ededed; */
+  height: 35px;
+  color: #3e3e3e;
+  text-align: center;
+  line-height: 35px;
+  /* cursor: pointer; */
+  vertical-align: middle;
+  z-index: 1;
+  margin-left: 15px;
+  transition: all .5s;
+}
+
+.pagination-wrapper {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+.pagination-info {
+  font-family: sans-serif;
+  font-size: 13px;
+  color: #8d8d8d;
+}
