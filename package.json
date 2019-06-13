@@ -1,6 +1,6 @@
 {
   "name": "@josephzhou/ms-pagination",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Pagination component",
   "main": "./lib/PaginationComponent.js",
   "scripts": {
@@ -29,12 +29,31 @@
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2"
   },
-  "author": "josephzhou",
+  "author": {
+    "name": "Joseph Zhou",
+    "email": "ashzhouyue@gmail.com",
+    "url": "http://piggymeow.com/"
+  },
   "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.134",
     "@types/material-ui": "^0.21.6",
     "@types/react": "^16.8.19",
     "lodash": "^4.17.11"
+  },
+  "keywords": [
+    "pagination",
+    "material pagination",
+    "typescript pagination",
+    "page",
+    "pagination component"
+  ],
+  "bugs": {
+    "url": "https://github.com/ZYMoridae/ms-pagination/issues",
+    "email": "ashzhouyue@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZYMoridae/ms-pagination.git"
   }
 }
