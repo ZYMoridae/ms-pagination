@@ -11,7 +11,9 @@ type PaginationComponentState = {
 type PaginationComponentProps = {
   onPageChanged: (page: number, perPage: number, orderBy: string) => void,
   count: number,
-  initialPage: number
+  initialPage: number,
+  nextIcon?: React.ReactDOM,
+  previousIcon?: React.ReactDOM
 };
 
 /**
@@ -38,7 +40,13 @@ const PageNumbers = ({ pageNumbersArray, onPageChanged, page, count }: {
     paginationArray = pageNumbersArray;
   } else if (count >= 5) {
     if (page <= 5) {
-      let firstFivePageNumbers: Array<any> = [...Array(page + 2).keys()].map(item => ++item);
+      let ceilPage = count;
+
+      if(page + 2 <= 5) {
+        ceilPage = page + 2;
+      }
+
+      let firstFivePageNumbers: Array<any> = [...Array(ceilPage).keys()].map(item => ++item);
       firstFivePageNumbers.push('...');
       paginationArray = firstFivePageNumbers;
     } else {
@@ -62,6 +70,9 @@ const PageNumbers = ({ pageNumbersArray, onPageChanged, page, count }: {
   )
 }
 
+/**
+ * Before navigation icon
+ */
 const NavigateBeforeRoundedIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -71,6 +82,9 @@ const NavigateBeforeRoundedIcon = () => {
   )
 }
 
+/**
+ * Next navigation icon
+ */
 const NavigateNextRoundedIcon = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -151,7 +165,7 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
   }
 
   render() {
-    const { count } = this.props;
+    const { count, nextIcon, previousIcon } = this.props;
 
     let pageNumbersArray: Array<number> = [...Array(count).keys()].map(item => ++item);
 
@@ -160,13 +174,13 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
         <ul className='pagination-container'>
 
           <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
-            <NavigateBeforeRoundedIcon />
+            {previousIcon ? previousIcon : <NavigateBeforeRoundedIcon />}  
           </li>
 
           {<PageNumbers pageNumbersArray={pageNumbersArray} onPageChanged={this.pageChanged} page={this.state.page} count={count} />}
 
           <li className='pagination-block nextBtn' onClick={this.nextBtnClick}>
-            <NavigateNextRoundedIcon />
+            {nextIcon ? nextIcon : <NavigateNextRoundedIcon />}
           </li>
 
           <li className='pagination-info'>

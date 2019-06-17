@@ -15,9 +15,8 @@ import PaginationComponent from "@josephzhou/ms-pagination";
 
 **Parameters**
 
-| Parameters    | Type                                                     | Description                                                        |   |   |
-|---------------|----------------------------------------------------------|--------------------------------------------------------------------|---|---|
-| count         | number                                                   | Total pages                                                        |   |   |
-| initialPage   | number                                                   | The page indicated when component initialized (default value is 1) |   |   |
-| onPageChanged | (page: number, perPage: number, orderBy: string) => void | This function will be called when page number changed              |   |   |
-
+| Parameters    | Type                                                     | Description                                                        |
+|---------------|----------------------------------------------------------|--------------------------------------------------------------------|
+| count         | number                                                   | Total pages                                                        |
+| initialPage   | number                                                   | The page indicated when component initialized (default value is 1) |
+| onPageChanged | (page: number, perPage: number, orderBy: string) => void | This function will be called when page number changed              |
