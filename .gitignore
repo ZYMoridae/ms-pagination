@@ -1,6 +1,6 @@
 node_modules
-lib
 package-lock.json
 yarn.lock
 
 README.html
+lib/*.map
