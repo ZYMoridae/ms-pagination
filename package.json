@@ -1,6 +1,6 @@
 {
   "name": "@josephzhou/ms-pagination",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Pagination component",
   "main": "./lib/PaginationComponent.js",
   "scripts": {
