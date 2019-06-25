@@ -65,7 +65,7 @@ const getPaginationArray = (page: number, count: number) => {
         paginationArray = curentPageNumbers;
       } else {
         let curentPageNumbers: Array<any> = [];
-        if(count > 5) {
+        if (count > 5) {
           curentPageNumbers = [1, 2, "..."];
         }
         for (var i = count - 4; i <= count; i++) {
@@ -119,6 +119,26 @@ const NavigateNextRoundedIcon = () => {
     </svg>
   )
 }
+
+
+const FirstPageRoundedIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path opacity=".87" fill="none" d="M24 0v24H0V0h24z" />
+      <path d="M17.7 15.89L13.82 12l3.89-3.89c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-4.59 4.59c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .38-.38.38-1.02-.01-1.4zM7 6c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1s-1-.45-1-1V7c0-.55.45-1 1-1z" />
+    </svg>
+  )
+}
+
+const LastPageRoundedIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path opacity=".87" fill="none" d="M0 0h24v24H0V0z" />
+      <path d="M6.29 8.11L10.18 12l-3.89 3.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L7.7 6.7c-.39-.39-1.02-.39-1.41 0-.38.39-.38 1.03 0 1.41zM17 6c.55 0 1 .45 1 1v10c0 .55-.45 1-1 1s-1-.45-1-1V7c0-.55.45-1 1-1z" />
+    </svg>
+  )
+}
+
 
 class PaginationComponent extends React.Component<PaginationComponentProps, PaginationComponentState> {
   constructor(props: any) {
@@ -191,12 +211,24 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
     this.pageChanged(page);
   }
 
+  firstPageBtnClick = () => {
+    this.pageChanged(1);
+  }
+
+  lastPageBtnClick = () => {
+    this.pageChanged(this.props.count);
+  }
+
   render() {
     const { count, nextIcon, previousIcon } = this.props;
 
     return (
       <div className='pagination-wrapper'>
         <ul className='pagination-container'>
+
+          <li className='pagination-block previousBtn' onClick={this.firstPageBtnClick}>
+            <FirstPageRoundedIcon />
+          </li>
 
           <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
             {previousIcon ? previousIcon : <NavigateBeforeRoundedIcon />}
@@ -206,6 +238,10 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
 
           <li className='pagination-block nextBtn' onClick={this.nextBtnClick}>
             {nextIcon ? nextIcon : <NavigateNextRoundedIcon />}
+          </li>
+
+          <li className='pagination-block previousBtn' onClick={this.lastPageBtnClick}>
+            <LastPageRoundedIcon />
           </li>
 
           <li className='pagination-info'>

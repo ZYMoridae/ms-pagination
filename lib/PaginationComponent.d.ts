@@ -21,6 +21,8 @@ declare class PaginationComponent extends React.Component<PaginationComponentPro
     pageChanged: (item: number) => void;
     previousBtnClick: () => void;
     nextBtnClick: () => void;
+    firstPageBtnClick: () => void;
+    lastPageBtnClick: () => void;
     render(): JSX.Element;
 }
 export default PaginationComponent;
