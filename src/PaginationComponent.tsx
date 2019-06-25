@@ -12,37 +12,44 @@ type PaginationComponentProps = {
   onPageChanged: (page: number, perPage: number, orderBy: string) => void,
   count: number,
   initialPage: number,
+  perPage: number,
   nextIcon?: React.ReactDOM,
   previousIcon?: React.ReactDOM
 };
 
 /**
  * 
- * @param param0 
+ * @param pageNumbersArray 
+ * @param page 
+ * @param onPageChanged 
  */
-const PageNumbers = ({ pageNumbersArray, onPageChanged, page, count }: {
-  pageNumbersArray: Array<number>, onPageChanged: any, page: number, count: number
-}) => {
+const arrayToNode = (pageNumbersArray: Array<any>, page: number, onPageChanged: any) => {
+  return (
+    <div>
+      {pageNumbersArray.map((item, index) =>
+        _.isNumber(item) ? <li className={`pagination-block page-number ${page === item ? 'active' : ''}`} key={index}><a className='num' onClick={() => { onPageChanged(item); }}>{item}</a></li> : <li key={index} className='pagination-block page-spread'>...</li>
+      )}
+    </div>
+  )
+}
 
+/**
+ * 
+ * @param pageNumbersArray 
+ * @param onPageChanged 
+ * @param page 
+ * @param count 
+ */
+const getPaginationArray = (page: number, count: number) => {
   let paginationArray: Array<any> = [];
 
-  const arrayToNode = (pageNumbersArray: Array<any>) => {
-    return (
-      <div>
-        {pageNumbersArray.map((item, index) =>
-          _.isNumber(item) ? <li className={`pagination-block page-number ${page === item ? 'active' : ''}`} key={index}><a className='num' onClick={() => { onPageChanged(item); }}>{item}</a></li> : <li key={index} className='pagination-block page-spread'>...</li>
-        )}
-      </div>
-    )
-  }
-
   if (count > 2 && count < 5) {
-    paginationArray = pageNumbersArray;
+    paginationArray = [...Array(count).keys()].map(item => ++item);
   } else if (count >= 5) {
     if (page <= 5) {
       let ceilPage = count;
 
-      if(page + 2 <= 5) {
+      if (page + 2 <= 5) {
         ceilPage = page + 2;
       }
 
@@ -63,9 +70,22 @@ const PageNumbers = ({ pageNumbersArray, onPageChanged, page, count }: {
       }
     }
   }
+  return paginationArray;
+}
+
+/**
+ * 
+ * @param param0 
+ */
+const PageNumbers = ({ onPageChanged, page, count }: {
+  onPageChanged: any, page: number, count: number
+}) => {
+
+  let paginationArray: Array<any> = getPaginationArray(page, count);
+
   return (
     <div>
-      {arrayToNode(paginationArray)}
+      {arrayToNode(paginationArray, page, onPageChanged)}
     </div>
   )
 }
@@ -115,11 +135,12 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
   }
 
   componentWillMount() {
-    const { initialPage } = this.props;
+    const { initialPage, perPage } = this.props;
 
     this.setState({
-      page: initialPage
-    })
+      page: initialPage,
+      perPage: perPage
+    });
   }
 
   componentDidMount() {
@@ -167,17 +188,15 @@ class PaginationComponent extends React.Component<PaginationComponentProps, Pagi
   render() {
     const { count, nextIcon, previousIcon } = this.props;
 
-    let pageNumbersArray: Array<number> = [...Array(count).keys()].map(item => ++item);
-
     return (
       <div className='pagination-wrapper'>
         <ul className='pagination-container'>
 
           <li className='pagination-block previousBtn' onClick={this.previousBtnClick}>
-            {previousIcon ? previousIcon : <NavigateBeforeRoundedIcon />}  
+            {previousIcon ? previousIcon : <NavigateBeforeRoundedIcon />}
           </li>
 
-          {<PageNumbers pageNumbersArray={pageNumbersArray} onPageChanged={this.pageChanged} page={this.state.page} count={count} />}
+          {<PageNumbers onPageChanged={this.pageChanged} page={this.state.page} count={count} />}
 
           <li className='pagination-block nextBtn' onClick={this.nextBtnClick}>
             {nextIcon ? nextIcon : <NavigateNextRoundedIcon />}

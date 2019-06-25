@@ -9,6 +9,7 @@ declare type PaginationComponentProps = {
     onPageChanged: (page: number, perPage: number, orderBy: string) => void;
     count: number;
     initialPage: number;
+    perPage: number;
     nextIcon?: React.ReactDOM;
     previousIcon?: React.ReactDOM;
 };

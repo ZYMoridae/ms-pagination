@@ -4,13 +4,20 @@
   "description": "Pagination component",
   "main": "./lib/PaginationComponent.js",
   "scripts": {
-    "build": "tsc && webpack"
+    "build": "tsc && webpack",
+    "test": "jest --coverage"
   },
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@types/rewire": "^2.5.28",
+    "@types/jest": "^24.0.15",
+    "react-test-renderer": "^16.8.6",
+    "@types/react-test-renderer": "^16.8.2",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -19,11 +26,13 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "css-loader": "^3.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "material-ui": "^0.20.2",
     "path": "^0.12.7",
     "prop-types": "^15.6.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "rewire": "^4.0.1",
     "style-loader": "^0.23.1",
     "typescript": "^3.5.1",
     "webpack": "^4.32.2",
