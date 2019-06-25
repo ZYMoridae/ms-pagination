@@ -47,25 +47,27 @@ const getPaginationArray = (page: number, count: number) => {
     paginationArray = [...Array(count).keys()].map(item => ++item);
   } else if (count >= 5) {
     if (page <= 5) {
-      let ceilPage = count;
-
-      if (page + 2 <= 5) {
-        ceilPage = page + 2;
+      let _count = count;
+      if (page + 2 <= count) {
+        _count = page + 2;
       }
 
-      let firstFivePageNumbers: Array<any> = [...Array(ceilPage).keys()].map(item => ++item);
-
-      if(page < count) {
-        firstFivePageNumbers.push('...');
+      let firstFivePageNumbers: Array<any> = [...Array(_count).keys()].map(
+        item => ++item
+      );
+      if (count > 5 || firstFivePageNumbers.length < 5) {
+        firstFivePageNumbers.push("...");
       }
-      
       paginationArray = firstFivePageNumbers;
     } else {
       if (page + 2 <= count) {
         let curentPageNumbers = [1, 2, '...', page - 2, page - 1, page, page + 1, page + 2, '...'];
         paginationArray = curentPageNumbers;
       } else {
-        let curentPageNumbers: Array<any> = [1, 2, '...'];
+        let curentPageNumbers: Array<any> = [];
+        if(count > 5) {
+          curentPageNumbers = [1, 2, "..."];
+        }
         for (var i = count - 4; i <= count; i++) {
           curentPageNumbers.push(i);
         }
