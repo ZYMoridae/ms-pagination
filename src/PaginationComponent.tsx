@@ -54,7 +54,11 @@ const getPaginationArray = (page: number, count: number) => {
       }
 
       let firstFivePageNumbers: Array<any> = [...Array(ceilPage).keys()].map(item => ++item);
-      firstFivePageNumbers.push('...');
+
+      if(page < count) {
+        firstFivePageNumbers.push('...');
+      }
+      
       paginationArray = firstFivePageNumbers;
     } else {
       if (page + 2 <= count) {
