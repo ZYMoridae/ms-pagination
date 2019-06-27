@@ -1,21 +1,16 @@
-import React from 'react';
-import '../src/PaginationComponent.css';
+import React from "react";
+import "../src/PaginationComponent.css";
+import PaginationComponentProps from "./PaginationComponentProps";
 declare type PaginationComponentState = {
     perPage: number;
     orderBy: string;
     page: number;
 };
-declare type PaginationComponentProps = {
-    onPageChanged: (page: number, perPage: number, orderBy: string) => void;
-    count: number;
-    initialPage: number;
-    perPage: number;
-    nextIcon?: React.ReactDOM;
-    previousIcon?: React.ReactDOM;
-};
+/**
+ * Pagination component
+ */
 declare class PaginationComponent extends React.Component<PaginationComponentProps, PaginationComponentState> {
     constructor(props: any);
-    updateUrlParmas(page: number, perPage: number, orderBy: string): void;
     componentWillMount(): void;
     componentDidMount(): void;
     pageChanged: (item: number) => void;
@@ -23,6 +18,7 @@ declare class PaginationComponent extends React.Component<PaginationComponentPro
     nextBtnClick: () => void;
     firstPageBtnClick: () => void;
     lastPageBtnClick: () => void;
+    perPageOptionOnClickHandler: (event: any) => void;
     render(): JSX.Element;
 }
 export default PaginationComponent;
