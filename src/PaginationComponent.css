@@ -3,6 +3,11 @@
   list-style-type: none;
   text-align: center;
   display: inline-flex;
+  padding-left: 0;
+}
+
+.pagination-container .pagination-number-wrapper {
+  display: inline-flex;
 }
 
 .pagination-container .pagination-block {
@@ -21,7 +26,7 @@
 }
 
 .pagination-container .pagination-block:hover {
-  transition: all .5s;
+  transition: all 0.5s;
   border: 1px solid #ff5000;
   color: #ff5000;
   z-index: 999;
@@ -75,14 +80,14 @@
   /* width: 35px; */
   /* border: solid 1px #ededed; */
   height: 35px;
-  color: #3e3e3e;
+  color: #8d8d8d;
   text-align: center;
   line-height: 35px;
   /* cursor: pointer; */
   vertical-align: middle;
   z-index: 1;
   margin-left: 15px;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .pagination-wrapper {
@@ -100,4 +105,83 @@
 
 .pagination-info .caption {
   margin-right: 5px;
+}
+
+.pagination-wrapper .pagination-info.pagination-meta.mobile {
+  display: none;
+}
+
+.pagination-container .page-number.mobile {
+  display: none;
+}
+.pagination-container .page-spread.mobile {
+  display: none;
+}
+
+/* Mobile */
+@media (min-width: 320px) and (max-width: 768px) {
+  .pagination-container .pagination-info.pagination-meta {
+    display: none;
+  }
+
+  .pagination-wrapper .pagination-info.pagination-meta.mobile {
+    display: block;
+  }
+
+  .pagination-wrapper .pagination-info.pagination-meta.mobile .caption {
+    margin-left: 5px;
+  }
+
+  .pagination-container .page-number.desktop {
+    display: none;
+  }
+  .pagination-container .page-spread.desktop {
+    display: none;
+  }
+  .pagination-container .page-number.mobile {
+    display: block;
+  }
+  .pagination-container .page-spread.mobile {
+    display: block;
+  }
+
+  .pagination-container .pagination-block {
+    position: relative;
+    float: left;
+    margin-left: -1px;
+    width: 28px;
+    border: solid 1px #ededed;
+    height: 28px;
+    color: #3e3e3e;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+    vertical-align: middle;
+    z-index: 1;
+  }
+
+  .pagination-container .previousBtn svg {
+    height: 28px;
+  }
+  
+  .pagination-container .nextBtn svg {
+    height: 28px;
+  }
+
+  .pagination-container .page-number .num {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    font-size: 12px;
+    height: 100%;
+    line-height: 28px;
+    vertical-align: middle;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .pagination-container .page-spread {
+    border: none;
+  }
 }

@@ -26,25 +26,25 @@ describe("Feature component", () => {
   });
 
   test("test getPagination Array page number is one", () => {
-    let paginationArray = getPaginationArray(1, 1);
+    let paginationArray = getPaginationArray(1, 1, false);
 
     expect(paginationArray).toStrictEqual([1]);
   });
 
   test("test getPagination Array page less than 5 but count large equal than 5", () => {
-    let paginationArray = getPaginationArray(3, 5);
+    let paginationArray = getPaginationArray(3, 5, false);
 
     expect(paginationArray).toStrictEqual([1, 2, 3, 4, 5]);
   });
 
   test("test getPagination Array page large than 5 but count large equal than 5", () => {
-    let paginationArray = getPaginationArray(6, 10);
+    let paginationArray = getPaginationArray(6, 10, false);
 
     expect(paginationArray).toStrictEqual([1, 2, '...', 4, 5, 6, 7, 8, '...']);
   });
 
   test("test getPagination Array page + 2 large than count but count large equal than 5", () => {
-    let paginationArray = getPaginationArray(9, 10);
+    let paginationArray = getPaginationArray(9, 10, false);
 
     expect(paginationArray).toStrictEqual([1, 2, '...', 6, 7, 8, 9, 10]);
   });

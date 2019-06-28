@@ -24,64 +24,6 @@ type PaginationComponentState = {
 const defaultPerPageOptions: Array<number> = [5, 10, 15, 20];
 
 /**
- *
- * @param pageNumbersArray
- * @param page
- * @param onPageChanged
- */
-const arrayToNode = (
-  pageNumbersArray: Array<any>,
-  page: number,
-  onPageChanged: any
-) => {
-  return (
-    <div>
-      {pageNumbersArray.map((item, index) =>
-        _.isNumber(item) ? (
-          <li
-            className={`pagination-block page-number ${
-              page === item ? "active" : ""
-            }`}
-            key={index}
-          >
-            <a
-              className="num"
-              onClick={() => {
-                onPageChanged(item);
-              }}
-            >
-              {item}
-            </a>
-          </li>
-        ) : (
-          <li key={index} className="pagination-block page-spread">
-            ...
-          </li>
-        )
-      )}
-    </div>
-  );
-};
-
-/**
- *
- * @param param0
- */
-const PageNumbers = ({
-  onPageChanged,
-  page,
-  count
-}: {
-  onPageChanged: any;
-  page: number;
-  count: number;
-}) => {
-  let paginationArray: Array<any> = getPaginationArray(page, count);
-
-  return <div>{arrayToNode(paginationArray, page, onPageChanged)}</div>;
-};
-
-/**
  * Pagination component
  */
 class PaginationComponent extends React.Component<
@@ -181,51 +123,106 @@ class PaginationComponent extends React.Component<
     return (
       <div className="pagination-wrapper">
         <ul className="pagination-container">
-          {showFirstPageNavigation && (
+          <div className="pagination-number-block-wrapper">
+            {showFirstPageNavigation && (
+              <li
+                className="pagination-block previousBtn"
+                onClick={this.firstPageBtnClick}
+              >
+                {firstPageNavigationIcon}
+              </li>
+            )}
+
             <li
               className="pagination-block previousBtn"
-              onClick={this.firstPageBtnClick}
+              onClick={this.previousBtnClick}
             >
-              {firstPageNavigationIcon}
+              {previousIcon}
             </li>
-          )}
 
-          <li
-            className="pagination-block previousBtn"
-            onClick={this.previousBtnClick}
-          >
-            {previousIcon}
-          </li>
+            {/* Desktop */}
+            {getPaginationArray(this.state.page, count, false).map(
+              (item: any, index: number) =>
+                _.isNumber(item) ? (
+                  <li
+                    className={`pagination-block desktop page-number ${
+                      this.state.page === item ? "active" : ""
+                    }`}
+                    key={index}
+                  >
+                    <a
+                      className="num"
+                      onClick={() => {
+                        this.pageChanged(item);
+                      }}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ) : (
+                  <li
+                    key={index}
+                    className="pagination-block desktop page-spread"
+                  >
+                    ...
+                  </li>
+                )
+            )}
 
-          {
-            <PageNumbers
-              onPageChanged={this.pageChanged}
-              page={this.state.page}
-              count={count}
-            />
-          }
+            {/* Mobile */}
+            {getPaginationArray(this.state.page, count, true).map(
+              (item: any, index: number) =>
+                _.isNumber(item) ? (
+                  <li
+                    className={`pagination-block mobile page-number ${
+                      this.state.page === item ? "active" : ""
+                    }`}
+                    key={index}
+                  >
+                    <a
+                      className="num"
+                      onClick={() => {
+                        this.pageChanged(item);
+                      }}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ) : (
+                  <li
+                    key={index}
+                    className="pagination-block mobile page-spread"
+                  >
+                    ...
+                  </li>
+                )
+            )}
 
-          <li className="pagination-block nextBtn" onClick={this.nextBtnClick}>
-            {nextIcon}
-          </li>
-
-          {showLastPageNavigation && (
             <li
-              className="pagination-block previousBtn"
-              onClick={this.lastPageBtnClick}
+              className="pagination-block nextBtn"
+              onClick={this.nextBtnClick}
             >
-              {lastPageNavigationIcon}
+              {nextIcon}
             </li>
-          )}
+
+            {showLastPageNavigation && (
+              <li
+                className="pagination-block previousBtn"
+                onClick={this.lastPageBtnClick}
+              >
+                {lastPageNavigationIcon}
+              </li>
+            )}
+          </div>
 
           {showPaginationMeta && (
-            <li className="pagination-info">
+            <li className="pagination-info pagination-meta">
               <span>Total {count} pages</span>
             </li>
           )}
 
           {showPerPageOptions && (
-            <li className="pagination-info">
+            <li className="pagination-info pagination-meta">
               <span className="caption">Per page</span>
               <select
                 onChange={this.perPageOptionOnClickHandler}
@@ -238,6 +235,25 @@ class PaginationComponent extends React.Component<
             </li>
           )}
         </ul>
+
+        <div className="pagination-info pagination-meta mobile">
+          <div>
+            <span className="pagination-info">Total {count} pages</span>
+            {showPerPageOptions && (
+              <span>
+                <span className="caption">Per page</span>
+                <select
+                  onChange={this.perPageOptionOnClickHandler}
+                  value={this.state.perPage}
+                >
+                  {perPageOptions.map((perPageOption, index) => (
+                    <option key={index}>{perPageOption}</option>
+                  ))}
+                </select>
+              </span>
+            )}
+          </div>
+        </div>
       </div>
     );
   }

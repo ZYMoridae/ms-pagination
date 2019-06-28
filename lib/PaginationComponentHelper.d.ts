@@ -22,7 +22,7 @@ export declare const LastPageRoundedIcon: () => JSX.Element;
  * @param page
  * @param count
  */
-export declare const getPaginationArray: (page: number, count: number) => any[];
+export declare const getPaginationArray: (page: number, count: number, isMobile: boolean) => any[];
 /**
  *
  * @param page
