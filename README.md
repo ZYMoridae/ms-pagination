@@ -11,6 +11,8 @@ npm install @josephzhou/ms-pagination
 
 ## Example
 
+![example](https://github.com/ZYMoridae/ms-pagination/blob/master/example.png?raw=true)                                                                            
+
 ### How to use it
 
 **Import package**
