@@ -2,6 +2,7 @@ import React from "react";
 import "../src/PaginationComponent.css";
 import _ from "lodash";
 import PaginationComponentProps from "./PaginationComponentProps";
+import PaginationParameterMapping from "./PaginationParameterMapping";
 
 import {
   updateUrlParmas,
@@ -57,8 +58,25 @@ class PaginationComponent extends React.Component<
     this.setState({
       page: item
     });
+
+    const {
+      enableUrlParamsUpadte = true,
+      paginationParameterMapping = {
+        page: "page",
+        perPage: "perPage",
+        orderBy: "orderBy"
+      }
+    } = this.props;
+
     this.props.onPageChanged(item, this.state.perPage, this.state.orderBy);
-    updateUrlParmas(item, this.state.perPage, this.state.orderBy);
+    if (enableUrlParamsUpadte) {
+      updateUrlParmas({
+        page: item,
+        perPage: this.state.perPage,
+        orderBy: this.state.orderBy,
+        paginationParameterMapping: paginationParameterMapping
+      });
+    }
   };
 
   previousBtnClick = () => {
@@ -99,11 +117,26 @@ class PaginationComponent extends React.Component<
 
   perPageOptionOnClickHandler = (event: any) => {
     let _perPage: number = parseInt(event.target.value, 10);
+    const {
+      enableUrlParamsUpadte = true,
+      paginationParameterMapping = {
+        page: "page",
+        perPage: "perPage",
+        orderBy: "orderBy"
+      }
+    } = this.props;
     this.setState({
       perPage: _perPage
     });
     this.props.onPageChanged(this.state.page, _perPage, this.state.orderBy);
-    updateUrlParmas(this.state.page, _perPage, this.state.orderBy);
+    if (enableUrlParamsUpadte) {
+      updateUrlParmas({
+        page: this.state.page,
+        perPage: _perPage,
+        orderBy: this.state.orderBy,
+        paginationParameterMapping: paginationParameterMapping
+      });
+    }
   };
 
   render() {

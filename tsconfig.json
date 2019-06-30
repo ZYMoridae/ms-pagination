@@ -9,6 +9,6 @@
     "strict": true,
     "jsx": "react"
   },
-  "include": ["src"],
+  "include": ["src", "__test__/PaginationComponent.test.tsx"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

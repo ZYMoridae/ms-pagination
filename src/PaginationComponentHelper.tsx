@@ -1,4 +1,5 @@
 import React from "react";
+import PaginationParameterMapping from "./PaginationParameterMapping";
 
 /**
  * Before navigation icon
@@ -117,12 +118,11 @@ export const getPaginationArray = (
       } else {
         let curentPageNumbers: Array<any> = [];
         if (count > 5) {
-          if(!isMobile) {
+          if (!isMobile) {
             curentPageNumbers = [1, 2, "..."];
-          }else {
+          } else {
             curentPageNumbers = ["..."];
           }
-          
         }
         for (var i = count - 4; i <= count; i++) {
           curentPageNumbers.push(i);
@@ -141,15 +141,27 @@ export const getPaginationArray = (
  * @param perPage
  * @param orderBy
  */
-export const updateUrlParmas = (
-  page: number,
-  perPage: number,
-  orderBy: string
-) => {
+export const updateUrlParmas = ({
+  page,
+  perPage,
+  orderBy,
+  paginationParameterMapping = {
+    page: "page",
+    perPage: "perPage",
+    orderBy: "orderBy"
+  }
+}: {
+  page: number;
+  perPage: number;
+  orderBy: string;
+  paginationParameterMapping?: PaginationParameterMapping;
+}) => {
   if (history.pushState) {
     let url = `${window.location.protocol}//${window.location.host}${
       window.location.pathname
-    }?page=${page}&perPage=${perPage}&orderBy=${orderBy}`;
+    }?${paginationParameterMapping.page}=${page}&${
+      paginationParameterMapping.perPage
+    }=${perPage}&${paginationParameterMapping.orderBy}=${orderBy}`;
     window.history.pushState(
       {
         path: url

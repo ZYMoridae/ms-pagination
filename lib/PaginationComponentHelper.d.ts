@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import PaginationParameterMapping from "./PaginationParameterMapping";
 /**
  * Before navigation icon
  */
@@ -29,4 +30,9 @@ export declare const getPaginationArray: (page: number, count: number, isMobile:
  * @param perPage
  * @param orderBy
  */
-export declare const updateUrlParmas: (page: number, perPage: number, orderBy: string) => void;
+export declare const updateUrlParmas: ({ page, perPage, orderBy, paginationParameterMapping }: {
+    page: number;
+    perPage: number;
+    orderBy: string;
+    paginationParameterMapping?: PaginationParameterMapping | undefined;
+}) => void;

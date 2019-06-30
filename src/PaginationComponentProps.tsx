@@ -1,3 +1,5 @@
+import PaginationParameterMapping from './PaginationParameterMapping';
+
 interface PaginationComponentProps {
   onPageChanged: (page: number, perPage: number, orderBy: string) => void;
   count: number;
@@ -12,6 +14,8 @@ interface PaginationComponentProps {
   showFirstPageNavigation?: boolean;
   showLastPageNavigation?: boolean;
   showPaginationMeta? : boolean;
+  enableUrlParamsUpadte? : boolean;
+  paginationParameterMapping?: PaginationParameterMapping;
 }
 
 export default PaginationComponentProps;
